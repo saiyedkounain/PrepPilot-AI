@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Input from '../../components/Inputs/Input.jsx';
 
-const Login = (setCurrentPage) => {
+const Login = ({setCurrentPage}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
@@ -38,6 +38,24 @@ const Login = (setCurrentPage) => {
           placeholder="*********"
           type="password"
         />
+
+        {error && <p className='text-red-500 text-xs pb-2.5'>{error}</p>}
+
+        <button type='submit' className='btn-primary'>
+          Login
+        </button>
+
+        <p className="text-[13px] text-slate-800 mt-3">
+          New User? Register now! {" "}
+          <button 
+            className="font-medium underline text-primary cursor-pointer" 
+            onClick={() => {
+              setCurrentPage("signup");
+            }}
+          >
+            SignUp
+          </button>
+        </p>
 
       </form>
     </div>
