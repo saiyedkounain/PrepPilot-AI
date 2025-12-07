@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Input from '../../components/Inputs/Input.jsx';
+import { validateEmail } from '../../utils/helper.js';
 
 const Login = ({setCurrentPage}) => {
   const [email, setEmail] = useState('');
@@ -13,6 +14,29 @@ const Login = ({setCurrentPage}) => {
   //handle login form submission
   const handleLogin = async (e) => {
     e.preventDefault();
+
+    if(!validateEmail(email)) {
+      
+      setError("Please enter a valid email address.");
+      return;
+    }
+
+    if(!password || password.length < 8) {
+      setError("Password must be at least 8 characters long.");
+      return;
+    }
+
+    //login api call
+    try {
+      // Simulate successful login
+      
+    } catch (err) {
+      if(err.response && err.response.data && err.response.data.message) {
+        setError(err.response.data.message);
+      } else {
+        setError("An unexpected error occurred. Please try again later.");
+      } 
+    }
   }
   
   return (
@@ -39,7 +63,7 @@ const Login = ({setCurrentPage}) => {
           type="password"
         />
 
-        {error && <p className='text-red-500 text-xs pb-2.5'>{error}</p>}
+        {error && <p className='text-red-500 text-xs pb-2.5'> {error}</p>}
 
         <button type='submit' className='btn-primary'>
           Login

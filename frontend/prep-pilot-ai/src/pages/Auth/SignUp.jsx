@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Input from '../../components/Inputs/Input.jsx';
 import ProfilePhotoSelector from '../../components/Inputs/ProfilePhotoSelector.jsx';
+import { validateEmail } from '../../utils/helper.js';
 
 const SignUp = ({setCurrentPage}) => {
   const [profilePic, setProfilePic] = React.useState(null);
@@ -17,6 +18,36 @@ const SignUp = ({setCurrentPage}) => {
   // lets handle sign up form submission
   const handleSignUp = async (e) => {
     e.preventDefault();
+
+    let profilePicUrl = "";
+    if(!fullName || fullName.length < 3) {
+      setError("Full name must be at least 3 characters long.");
+      return;
+    }
+
+    if(!validateEmail(email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+    if(!password || password.length < 8) {
+      setError("Password must be at least 8 characters long.");
+      return;
+    }
+
+    setError("");
+
+    try {
+      // Simulate successful login
+      
+    } catch (err) {
+      if(err.response && err.response.data && err.response.data.message) {
+        setError(err.response.data.message);
+      } else {
+        setError("An unexpected error occurred. Please try again later.");
+      } 
+    }
+    
+
   };
   return (
     <div className="w-[90vw] md:w-[33vw] p-7 flex flex-col justify-center" >
@@ -29,7 +60,7 @@ const SignUp = ({setCurrentPage}) => {
         <div className="grid grid-cols-1 md:grid-cols-1 gap-2">
           <Input 
             value={fullName}
-            onChange={({target}) => {setFullName(target.value)}}
+            onChange={(target) => {setFullName(target.value)}}
             label="Full Name"
             placeholder="e.g Sanjana "
             type="text"
@@ -37,14 +68,14 @@ const SignUp = ({setCurrentPage}) => {
 
           <Input 
             value={email}
-            onChange={({target}) => {setEmail(target.value)}}
+            onChange={(target) => {setEmail(target.value)}}
             label="Enail Address"
             placeholder="saiyedk@gmail.com "
             type="text"
           />
           <Input 
             value={password}
-            onChange={({target}) => {setPassword(target.value)}}
+            onChange={(target) => {setPassword(target.value)}}
             label="Password"
             placeholder="Min. 8 characters "
             type="password"
