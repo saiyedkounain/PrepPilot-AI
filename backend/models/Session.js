@@ -9,7 +9,7 @@ const sessionSchema = new mongoose.Schema(
         descriptionv: String,
         questions : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Question' }],
     },
-    { timestamps: true}
+    { timestamps: true} 
 );
 
 module.exports = mongoose.model('Session', sessionSchema);
