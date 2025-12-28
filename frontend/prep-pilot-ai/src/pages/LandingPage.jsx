@@ -130,7 +130,7 @@ const LandingPage = () => {
       </div>
      </div>
       <div className="text-sm bg-gray-50 text-secondary p-5 mt-5">
-        Made with ❤️ by our team.
+        Made with ❤️ by Saiyed Kounain and team.
       </div>
 
       <Modal 
