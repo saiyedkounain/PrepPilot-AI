@@ -76,52 +76,60 @@ cd frontend/prep-pilot-ai
 npm run devThe frontend will run on `http://localhost:5173`
 
 ## 📁 Project Structure
+```md
+## 📁 Project Structure
+
+```
+
 CollegeProject/
 ├── backend/
 │   ├── config/
-│   │   └── db.js                 # MongoDB connection
+│   │   └── db.js                  # MongoDB connection
 │   ├── controllers/
-│   │   ├── aiController.js       # AI question generation
-│   │   ├── authController.js     # Authentication logic
-│   │   ├── questionController.js # Question management
-│   │   └── sessionController.js  # Session management
+│   │   ├── aiController.js        # AI question generation
+│   │   ├── authController.js      # Authentication logic
+│   │   ├── questionController.js  # Question management
+│   │   └── sessionController.js   # Session management
 │   ├── middlewares/
-│   │   ├── authMiddleware.js     # JWT authentication
-│   │   └── uploadMiddleware.js   # File upload handling
+│   │   ├── authMiddleware.js      # JWT authentication
+│   │   └── uploadMiddleware.js    # File upload handling
 │   ├── models/
-│   │   ├── User.js               # User model
-│   │   ├── Session.js            # Session model
-│   │   └── Question.js           # Question model
+│   │   ├── User.js                # User model
+│   │   ├── Session.js             # Session model
+│   │   └── Question.js            # Question model
 │   ├── routes/
-│   │   ├── authRoutes.js         # Auth endpoints
-│   │   ├── sessionRoutes.js      # Session endpoints
-│   │   └── questionRoutes.js     # Question endpoints
-│   ├── uploads/                  # Uploaded files
+│   │   ├── authRoutes.js          # Auth endpoints
+│   │   ├── sessionRoutes.js       # Session endpoints
+│   │   └── questionRoutes.js      # Question endpoints
+│   ├── uploads/                   # Uploaded files
 │   ├── utils/
-│   │   └── prompts.js            # AI prompts
-│   └── server.js                 # Express server
+│   │   └── prompts.js             # AI prompts
+│   └── server.js                  # Express server
 │
 └── frontend/
-    └── prep-pilot-ai/
-        ├── src/
-        │   ├── assets/           # Static assets
-        │   ├── components/       # Reusable components
-        │   │   ├── Inputs/
-        │   │   ├── Modal.jsx
-        │   │   └── ...
-        │   ├── context/
-        │   │   └── UserContext.jsx # User state management
-        │   ├── pages/
-        │   │   ├── Auth/         # Login & SignUp
-        │   │   ├── Home/         # Dashboard
-        │   │   ├── InterviewPrep/ # Interview prep page
-        │   │   └── LandingPage.jsx
-        │   ├── theme/
-        │   │   └── theme.js      # Material-UI theme
-        │   ├── utils/            # Utility functions
-        │   ├── App.jsx           # Main app component
-        │   └── main.jsx          # Entry point
-        └── package.json
+└── prep-pilot-ai/
+├── src/
+│   ├── assets/            # Static assets
+│   ├── components/        # Reusable components
+│   │   ├── Inputs/
+│   │   ├── Modal.jsx
+│   │   └── ...
+│   ├── context/
+│   │   └── UserContext.jsx # User state management
+│   ├── pages/
+│   │   ├── Auth/          # Login & SignUp
+│   │   ├── Home/          # Dashboard
+│   │   ├── InterviewPrep/ # Interview preparation page
+│   │   └── LandingPage.jsx
+│   ├── theme/
+│   │   └── theme.js       # Material-UI theme
+│   ├── utils/             # Utility functions
+│   ├── App.jsx            # Main app component
+│   └── main.jsx           # Entry point
+└── package.json
+
+```
+```
 
 ## 🔌 API Endpoints
 
