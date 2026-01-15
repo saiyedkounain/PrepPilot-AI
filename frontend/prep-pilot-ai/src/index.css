@@ -13,8 +13,9 @@
     }
 
     body {
-        background-color: #fcbfbc;
         overflow-x: hidden;
+        margin: 0;
+        padding: 0;
     }
 }
 
