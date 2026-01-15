@@ -76,3 +76,123 @@ cd frontend/prep-pilot-ai
 npm run devThe frontend will run on `http://localhost:5173`
 
 ## 📁 Project Structure
+CollegeProject/
+├── backend/
+│   ├── config/
+│   │   └── db.js                 # MongoDB connection
+│   ├── controllers/
+│   │   ├── aiController.js       # AI question generation
+│   │   ├── authController.js     # Authentication logic
+│   │   ├── questionController.js # Question management
+│   │   └── sessionController.js  # Session management
+│   ├── middlewares/
+│   │   ├── authMiddleware.js     # JWT authentication
+│   │   └── uploadMiddleware.js   # File upload handling
+│   ├── models/
+│   │   ├── User.js               # User model
+│   │   ├── Session.js            # Session model
+│   │   └── Question.js           # Question model
+│   ├── routes/
+│   │   ├── authRoutes.js         # Auth endpoints
+│   │   ├── sessionRoutes.js      # Session endpoints
+│   │   └── questionRoutes.js     # Question endpoints
+│   ├── uploads/                  # Uploaded files
+│   ├── utils/
+│   │   └── prompts.js            # AI prompts
+│   └── server.js                 # Express server
+│
+└── frontend/
+    └── prep-pilot-ai/
+        ├── src/
+        │   ├── assets/           # Static assets
+        │   ├── components/       # Reusable components
+        │   │   ├── Inputs/
+        │   │   ├── Modal.jsx
+        │   │   └── ...
+        │   ├── context/
+        │   │   └── UserContext.jsx # User state management
+        │   ├── pages/
+        │   │   ├── Auth/         # Login & SignUp
+        │   │   ├── Home/         # Dashboard
+        │   │   ├── InterviewPrep/ # Interview prep page
+        │   │   └── LandingPage.jsx
+        │   ├── theme/
+        │   │   └── theme.js      # Material-UI theme
+        │   ├── utils/            # Utility functions
+        │   ├── App.jsx           # Main app component
+        │   └── main.jsx          # Entry point
+        └── package.json
+
+## 🔌 API Endpoints
+
+### 🔐 Authentication
+- **POST** `/api/auth/register` – Register a new user  
+- **POST** `/api/auth/login` – Login user  
+- **GET** `/api/auth/profile` – Get logged-in user profile  
+
+### 📂 Sessions
+- **GET** `/api/sessions/my-sessions` – Get all sessions of the logged-in user  
+- **GET** `/api/sessions/:id` – Get a session by ID  
+- **POST** `/api/sessions/create` – Create a new interview preparation session  
+
+### ❓ Questions
+- **POST** `/api/questions/add` – Add a new question  
+- **POST** `/api/questions/:id/pin` – Pin or unpin a question  
+- **POST** `/api/questions/:id/note` – Add a note to a question  
+
+### 🤖 AI
+- **POST** `/api/ai/generate-questions` – Generate AI-based interview questions  
+- **POST** `/api/ai/generate-explanation` – Generate AI-powered answer explanations  
+
+---
+
+## 🎨 UI/UX Features
+- **Modern Material Design** – Professional Material-UI components  
+- **Responsive Layout** – Works seamlessly on desktop, tablet, and mobile  
+- **Smooth Animations** – Enhanced user experience with transitions  
+- **Dark/Light Theme Support** – Fully customizable theme system  
+- **Accessible Design** – WCAG-compliant components  
+
+---
+
+## 🔐 Authentication
+Prep Pilot AI uses **JWT (JSON Web Tokens)** for secure authentication. Users can:  
+- **Register** with email, password, and optional profile picture  
+- **Login** securely  
+- **Access protected routes** using JWT tokens  
+
+---
+
+## 🤖 AI Integration
+Prep Pilot AI uses **OpenAI’s API** to:  
+- **Generate role-specific interview questions**  
+- **Provide detailed explanations for answers**  
+- **Create personalized learning paths**  
+
+---
+
+## 📝 Usage
+1. **Sign Up / Login** – Create an account or log into your existing account  
+2. **Create a Session** – Start a new interview preparation session  
+3. **Enter Details** – Specify your role, experience level, and focus topics  
+4. **Generate Questions** – Let AI generate personalized interview questions  
+5. **Get Answers** – Request AI-powered explanations for any question  
+6. **Take Notes** – Add personal notes and pin important questions  
+7. **Organize** – View and manage all your sessions from the dashboard  
+
+---
+
+## 🧪 Development
+
+### 🚀 Build for Production
+
+### Backend
+```bash
+cd backend
+npm run dev
+```
+#### Frontend
+```bash
+cd frontend/prep-pilot-ai
+npm run dev
+```
