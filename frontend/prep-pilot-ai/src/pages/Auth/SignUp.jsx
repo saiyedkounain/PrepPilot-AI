@@ -4,6 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import Input from '../../components/Inputs/Input.jsx';
 import ProfilePhotoSelector from '../../components/Inputs/ProfilePhotoSelector.jsx';
 import { validateEmail } from '../../utils/helper.js';
+import axiosInstance from '../../utils/axiosInstance.js';
+import { API_PATHS } from '../../utils/apiPaths.js';
+import { uploadProfileImage } from '../../utils/uploadImage.js';
+import { useUser } from '../../context/UserContext.jsx';
 
 const SignUp = ({setCurrentPage}) => {
   const [profilePic, setProfilePic] = React.useState(null);
@@ -13,7 +17,8 @@ const SignUp = ({setCurrentPage}) => {
  
   const [error, setError] = React.useState(null);
 
-  const naigarte = useNavigate();
+  const navigate = useNavigate();
+  const { login } = useUser();
 
   // lets handle sign up form submission
   const handleSignUp = async (e) => {
@@ -37,14 +42,37 @@ const SignUp = ({setCurrentPage}) => {
     setError("");
 
     try {
-      // Simulate successful login
+      let profileImageUrl = '';
+      if (profilePic) {
+        profileImageUrl = await uploadProfileImage(profilePic);
+      }
+
+      const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER, {
+        name: fullName,
+        email,
+        password,
+        profileImageUrl,
+      });
+
+      const userData = {
+        _id: response.data._id,
+        name: response.data.name,
+        email: response.data.email,
+        profileImageUrl: response.data.profileImageUrl,
+      };
+
+      login(userData, response.data.token);
+      navigate('/dashboard');
       
     } catch (err) {
-      if(err.response && err.response.data && err.response.data.message) {
+      console.error('Sign up failed', err);
+      if (err.response && err.response.data && err.response.data.message) {
         setError(err.response.data.message);
+      } else if (err.request) {
+        setError('Cannot reach the server. Make sure the backend is running on http://localhost:5000.');
       } else {
-        setError("An unexpected error occurred. Please try again later.");
-      } 
+        setError('An unexpected error occurred. Please try again later.');
+      }
     }
     
 

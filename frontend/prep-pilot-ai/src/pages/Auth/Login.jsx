@@ -3,6 +3,9 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Input from '../../components/Inputs/Input.jsx';
 import { validateEmail } from '../../utils/helper.js';
+import axiosInstance from '../../utils/axiosInstance.js';
+import { API_PATHS } from '../../utils/apiPaths.js';
+import { useUser } from '../../context/UserContext.jsx';
 
 const Login = ({setCurrentPage}) => {
   const [email, setEmail] = useState('');
@@ -10,6 +13,7 @@ const Login = ({setCurrentPage}) => {
   const [error, setError] = useState(null);
 
   const navigate = useNavigate();
+  const { login } = useUser();
 
   //handle login form submission
   const handleLogin = async (e) => {
@@ -28,14 +32,31 @@ const Login = ({setCurrentPage}) => {
 
     //login api call
     try {
-      // Simulate successful login
+      const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN, {
+        email,
+        password,
+      });
+
+      const userData = {
+        _id: response.data._id,
+        name: response.data.name,
+        email: response.data.email,
+        profileImageUrl: response.data.profileImageUrl,
+      };
+
+      login(userData, response.data.token);
+      setError(null);
+      navigate('/dashboard');
       
     } catch (err) {
-      if(err.response && err.response.data && err.response.data.message) {
+      console.error('Login failed', err);
+      if (err.response && err.response.data && err.response.data.message) {
         setError(err.response.data.message);
+      } else if (err.request) {
+        setError('Cannot reach the server. Make sure the backend is running on http://localhost:5000.');
       } else {
-        setError("An unexpected error occurred. Please try again later.");
-      } 
+        setError('An unexpected error occurred. Please try again later.');
+      }
     }
   }
   

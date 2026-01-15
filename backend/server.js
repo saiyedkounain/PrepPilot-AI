@@ -12,14 +12,14 @@ const { protect } = require("./middlewares/authMiddleware");
 const { generateInterviewQuestions , generateConceptExplanation} = require("./controllers/aiController");
 
 
-const app = express();
+const app = express(); 
 
 
 // middle ware to handle cors
 
 app.use(
     cors({
-        origin: "http://localhost:3000",
+        origin: ["http://localhost:5173", "http://localhost:3000"],
         methods: ["GET", "POST", "PUT", "DELETE"],
         allowedHeaders: ["Content-Type", "Authorization"],
     })
@@ -44,7 +44,7 @@ app.use("/api/ai/generate-explanation", protect, generateConceptExplanation);
 app.use('/uploads', express.static(path.join(__dirname, 'uploads'), {}));
 
 //start server
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
